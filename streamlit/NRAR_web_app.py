@@ -29,13 +29,13 @@ st.set_page_config(layout="wide")
 
 #%% App
 # Configure app layout and sidebar menu
-st.sidebar.title('Navigation')
+st.sidebar.title('NRAR Web Apps')
 
 selection = st.sidebar.radio("Go to",['Home','Compliance Data Viz','Trade-Off Analysis','About'])
 
 st.sidebar.title('About')
 
-st.sidebar.info("This app is maintained by The Regulators")
+st.sidebar.info("NRAR's interdisciplinary behavioural and cost optimisation model: A collection of Streamlit web apps for data analysis, data visualisation and exploratory modelling")
 
 
 if selection == 'Compliance Data Viz':
