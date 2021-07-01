@@ -9,9 +9,9 @@ import streamlit as st
 # from folium import plugins
 # from folium.plugins import Fullscreen
 # from streamlit_folium import folium_static
-# import streamlit.components.v1 as components
+import streamlit.components.v1 as components
 # from pathlib import Path
-# import platform
+import platform
 import os
 
 import pandas as pd
@@ -40,8 +40,10 @@ st.sidebar.info("This app is maintained by The Regulators")
 
 if selection == 'Compliance Data Viz':
 
-    # if platform.system() == 'Darwin':
-    #     markdown = read_markdown_file('submit_page.md')
+    if platform.system() == 'Darwin':
+        with open('../html/Case_Details_Sunburst.html', 'r') as f:
+            html_string = f.read()
+        components.html(html_string, width=1500, height=1500)
     # else:
     #     markdown = read_markdown_file(os.path.join(stdir,'submit_page.md'))
 
