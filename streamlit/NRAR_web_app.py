@@ -26,7 +26,7 @@ st.sidebar.title('About')
 st.sidebar.info("This app is maintained by The Regulators")
 
 
-if selection == 'Compliance Data Viz':
+# if selection == 'Compliance Data Viz':
 
     # if platform.system() == 'Darwin':
     #     markdown = read_markdown_file('submit_page.md')
@@ -37,7 +37,7 @@ if selection == 'Compliance Data Viz':
 
     #components.iframe("https://docs.google.com/forms/d/e/1FAIpQLSeOgQtYLJALacZQfwF2Nb5RMWOqg_ODVyyEXoStBKHekfg66w/viewform?usp=sf_link", height=1500, scrolling=True)
 
-if selection == 'Trade-Off Analysis':
+# if selection == 'Trade-Off Analysis':
 
     # if platform.system() == 'Darwin':
     #     markdown = read_markdown_file('about_page.md')
