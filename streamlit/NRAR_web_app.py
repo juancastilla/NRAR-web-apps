@@ -50,25 +50,24 @@ st.sidebar.info("This app is maintained by The Regulators")
 # NOTE: this could be refactored into a separate .py script and import on app start
 
 # if selection == 'Find Models':
-    
+
     # st.title('GroMoPo — Groundwater Model Portal')
 
     # st.write("Sharing groundwater model data, knowledge and insights more easily through a portal of regional and global numerical groundwater models. The first priority is archiving existing models, but the repository could eventually archive model input and scripts for translating commonly used geospatial datasets into model inputs.")
-    
+
     # map = folium.Map(zoom_start=3, crs='EPSG{}'.format(epsg),min_zoom=3,max_bounds=True)
     # folium.TileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', attr='x',name='OpenTopoMap').add_to(map)
     # folium.TileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',name='ArcWorldImagery', attr='x').add_to(map)
-    
-    
+
+
     # rgroup, marker_cluster, mlayer = plot_map(all_gdf,img,popup=popup)
-    
+
     # rgroup.add_to(map)
     # marker_cluster.add_to(map)
     # mlayer.add_to(map)
-    
+
     # map.add_child(folium.LayerControl())
 
     # Fullscreen().add_to(map)
-    
+
     # folium_static(map, height=700, width=1400)
-    
