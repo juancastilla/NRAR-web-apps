@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PivotTable.js</title>
+
+        <!-- external libs from cdnjs -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/d3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/c3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
+
+        <style>
+            body {font-family: Verdana;}
+            .node {
+              border: solid 1px white;
+              font: 10px sans-serif;
+              line-height: 12px;
+              overflow: hidden;
+              position: absolute;
+              text-indent: 2px;
+            }
+            .c3-line, .c3-focused {stroke-width: 3px !important;}
+            .c3-bar {stroke: white !important; stroke-width: 1;}
+            .c3 text { font-size: 12px; color: grey;}
+            .tick line {stroke: white;}
+            .c3-axis path {stroke: grey;}
+            .c3-circle { opacity: 1 !important; }
+            .c3-xgrid-focus {visibility: hidden !important;}
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(function(){
+                if(window.location != window.parent.location)
+                    $("<a>", {target:"_blank", href:""})
+                        .text("[pop out]").prependTo($("body"));
+
+                $("#output").pivotUI(
+                    $.csv.toArrays($("#output").text()),
+                    $.extend({
+                        renderers: $.extend(
+                            $.pivotUtilities.renderers,
+                            $.pivotUtilities.c3_renderers,
+                            $.pivotUtilities.d3_renderers,
+                            $.pivotUtilities.export_renderers
+                            ),
+                        hiddenAttributes: [""]
+                    }, {})
+                ).show();
+             });
+        </script>
+        <div id="output" style="display: none;">Case Ref No,Description,Enforcement Action Date,Type of Enforcement Action,Count of Enforcement Action
+00017-2018,"Amount: 750.00, Delivery: mail, Sent: 17/07/2018",Jul-18,Penalty Notice,1
+00017-2018,s333(2) - direction to protect water sources,Jul-18,Statutory Notice,2
+00026-2017,s329(2) - direction to remove unlawful water management work,Nov-17,Statutory Notice,1
+00026-2017,s329(2) - direction to remove unlawful water management work,Jul-18,Statutory Notice,1
+00027-2018,"Amount: 1500.00, Delivery: mail, Sent: 01/03/2019",Mar-19,Penalty Notice,2
+00027-2018,s326(1) - direction to install/maintain metering equipment,Mar-19,Statutory Notice,2
+00030-2020,s327(2) - swo re unlawful construction or use of water management work,Mar-20,Statutory Notice,2
+00031-2017,s333(2) - direction to protect water sources,Jan-17,Statutory Notice,1
+00034-2019,s329(2) - direction to remove unlawful water management work,Apr-20,Statutory Notice,1
+00034-2019,s333(2) - direction to protect water sources,Jul-19,Statutory Notice,1
+00034-2019,s329(2) - direction to remove unlawful water management work,Mar-20,Statutory Notice,15
+00036-2017,"Amount: 750.00, Delivery: mail, Sent: 12/10/2018",Oct-18,Penalty Notice,1
+00036-2017,s327(2) - swo re unlawful construction or use of water management work,Mar-17,Statutory Notice,1
+00036-2018,"Amount: 750.00, Delivery: mail, Sent: 28/06/2019",Jun-19,Penalty Notice,1
+00041-2020,"Amount: 1500.00, Delivery: mail, Sent: 21/05/2020",May-20,Penalty Notice,1
+00044-2020,"Amount: 1500.00, Delivery: mail, Sent: 07/05/2020",May-20,Penalty Notice,1
+00044-2020,s329(2) - direction to remove unlawful water management work,May-20,Statutory Notice,1
+00046-2019,s327(2) - swo re unlawful construction or use of water management work,Mar-19,Statutory Notice,1
+00046-2019,"Amount: 750.00, Delivery: mail, Sent: 17/12/2019",Dec-19,Penalty Notice,2
+00050-2019,"Amount: 1500.00, Delivery: mail, Sent: 21/08/2019",Aug-19,Penalty Notice,2
+00051-2020,s329(2) - direction to remove unlawful water management work,Jan-20,Statutory Notice,1
+00053-2020,"Amount: 750.00, Delivery: mail, Sent: 26/10/2020",Oct-20,Penalty Notice,1
+00061-2018,"Amount: 750.00, Delivery: mail, Sent: 12/08/2019",Aug-19,Penalty Notice,1
+00061-2018,s329(2) - direction to remove unlawful water management work,Aug-19,Statutory Notice,2
+00069-2017,s333(2) - direction to protect water sources,Nov-19,Statutory Notice,1
+00070-2019,s327(2) - swo re unlawful construction or use of water management work,Oct-19,Statutory Notice,1
+00070-2019,"Amount: 1500.00, Delivery: mail, Sent: 25/03/2020",Mar-20,Penalty Notice,2
+00075-2020,Notice to comply with licence conditions,Oct-20,Statutory Notice,1
+00077-2017,s333(2) - direction to protect water sources,Jun-19,Statutory Notice,1
+00077-2018,"Amount: 750.00, Delivery: mail, Sent: 08/01/2019",Jan-19,Penalty Notice,2
+00077-2018,s329(2) - direction to remove unlawful water management work,Jan-19,Statutory Notice,2
+00078-2019,"Amount: 750.00, Delivery: mail, Sent: 28/06/2019",Jun-19,Penalty Notice,1
+00078-2019,s327(2) - swo re unlawful construction or use of water management work,Jun-19,Statutory Notice,1
+00082-2020,"Amount: 750.00, Delivery: mail, Sent: 27/04/2020",Apr-20,Penalty Notice,2
+00084-2018,s327(2) - swo re unlawful construction or use of water management work,Mar-19,Statutory Notice,2
+00086-2015,s333(2) - direction to protect water sources,Dec-16,Statutory Notice,1
+00086-2015,s333(2) - direction to protect water sources,Sep-17,Statutory Notice,2
+00087-2020,"Amount: 750.00, Delivery: mail, Sent: 23/06/2020",Jun-20,Penalty Notice,1
+00087-2020,s333(2) - direction to protect water sources,Jun-20,Statutory Notice,6
+00088-2017,s333(2) - direction to protect water sources,Jan-19,Statutory Notice,1
+00088-2017,s328(2) - swo re unlawful controlled activity or aquifer interference,May-17,Statutory Notice,2
+00088-2018,"Amount: 1500.00, Delivery: mail, Sent: 23/07/2018",Jul-18,Penalty Notice,1
+00094-2019,"Amount: 1500.00, Delivery: mail, Sent: 04/07/2019",Jul-19,Penalty Notice,2
+00103-2019,s329(2) - direction to remove unlawful water management work,Nov-19,Statutory Notice,1
+00106-2020,"Amount: 1500.00, Delivery: mail, Sent: 11/11/2020",Nov-20,Penalty Notice,3
+00108-2015,"Amount: 1500.00, Delivery: mail, Sent: 01/02/2017",Feb-17,Penalty Notice,1
+00108-2015,s333(2) - direction to protect water sources,Nov-17,Statutory Notice,1
+00108-2015,s333(2) - direction to protect water sources,Nov-18,Statutory Notice,1
+00112-2017,s333(2) - direction to protect water sources,Feb-18,Statutory Notice,1
+00112-2017,s333(2) - direction to protect water sources,Mar-18,Statutory Notice,1
+00113-2019,s327(2) - swo re unlawful construction or use of water management work,Jul-19,Statutory Notice,1
+00121-2018,"Amount: 1500.00, Delivery: mail, Sent: 27/09/2018",Sep-18,Penalty Notice,1
+00121-2018,s328(2) - swo re unlawful controlled activity or aquifer interference,Mar-18,Statutory Notice,1
+00121-2018,s333(2) - direction to protect water sources,Aug-18,Statutory Notice,1
+00121-2019,"Amount: 750.00, Delivery: mail, Sent: 21/08/2019",Aug-19,Penalty Notice,1
+00123-2020,"Amount: 750.00, Delivery: mail, Sent: 26/03/2020",Mar-20,Penalty Notice,2
+00124-2017,s329(2) - direction to remove unlawful water management work,Mar-18,Statutory Notice,1
+00127-2017,"Amount: 750.00, Delivery: mail, Sent: 01/04/2019",Apr-19,Penalty Notice,1
+00127-2017,s333(2) - direction to protect water sources,Apr-19,Statutory Notice,4
+00128-2017,s326(1) - direction to install/maintain metering equipment,Jul-19,Statutory Notice,1
+00131-2018,"Amount: 750.00, Delivery: mail, Sent: 25/01/2019",Jan-19,Penalty Notice,1
+00134-2018,"Amount: 750.00, Delivery: mail, Sent: 11/09/2018",Sep-18,Penalty Notice,1
+00134-2018,s326(1) - direction to install/maintain metering equipment,Mar-19,Statutory Notice,1
+00134-2018,s326(1) - direction to install/maintain metering equipment,Nov-19,Statutory Notice,1
+00134-2018,s327(2) - swo re unlawful construction or use of water management work,Oct-19,Statutory Notice,1
+00140-2017,"Amount: 750.00, Delivery: mail, Sent: 19/08/2019",Aug-19,Penalty Notice,1
+00140-2017,s333(2) - direction to protect water sources,Aug-19,Statutory Notice,1
+00140-2017,s333(2) - direction to protect water sources,Sep-17,Statutory Notice,2
+00140-2017,s333(2) - direction to protect water sources,Sep-19,Statutory Notice,2
+00140-2018,"Amount: 750.00, Delivery: mail, Sent: 04/03/2020",Mar-20,Penalty Notice,2
+00149-2017,s329(2) - direction to remove unlawful water management work,Feb-18,Statutory Notice,1
+00149-2017,s329(2) - direction to remove unlawful water management work,Mar-18,Statutory Notice,1
+00153-2018,"Amount: 750.00, Delivery: mail, Sent: 25/02/2020",Feb-20,Penalty Notice,2
+00155-2019,s333(2) - direction to protect water sources,Jan-20,Statutory Notice,1
+00158-2018,"Amount: 1500.00, Delivery: mail, Sent: 06/09/2018",Sep-18,Penalty Notice,1
+00158-2018,s329(2) - direction to remove unlawful water management work,Nov-18,Statutory Notice,1
+00158-2019,"Amount: 750.00, Delivery: mail, Sent: 13/11/2019",Nov-19,Penalty Notice,1
+00158-2019,s327(2) - swo re unlawful construction or use of water management work,Nov-19,Statutory Notice,1
+00161-2018,"Amount: 1500.00, Delivery: mail, Sent: 29/03/2019",Mar-19,Penalty Notice,4
+00164-2019,"Amount: 1500.00, Delivery: mail, Sent: 26/11/2019",Nov-19,Penalty Notice,1
+00164-2019,s333(2) - direction to protect water sources,Mar-19,Statutory Notice,1
+00166-2019,s333(2) - direction to protect water sources,Jan-20,Statutory Notice,1
+00173-2020,s329(2) - direction to remove unlawful water management work,May-20,Statutory Notice,1
+00174-2019,s333(2) - direction to protect water sources,Jul-20,Statutory Notice,1
+00175-2020,"Amount: 750.00, Delivery: mail, Sent: 12/05/2020",May-20,Penalty Notice,1
+00188-2015,s329(2) - direction to remove unlawful water management work,Dec-18,Statutory Notice,1
+00188-2018,"Amount: 750.00, Delivery: mail, Sent: 09/01/2019",Jan-19,Penalty Notice,1
+00188-2018,s327(2) - swo re unlawful construction or use of water management work,Dec-18,Statutory Notice,1
+00199-2016,s333(2) - direction to protect water sources,Aug-19,Statutory Notice,1
+00199-2016,s333(2) - direction to protect water sources,Nov-19,Statutory Notice,1
+00202-2020,s333(2) - direction to protect water sources,Aug-20,Statutory Notice,1
+00202-2020,"Amount: 1500.00, Delivery: mail, Sent: 17/08/2020",Aug-20,Penalty Notice,2
+00202-2020,"Amount: 1500.00, Delivery: mail, Sent: 20/08/2020",Aug-20,Penalty Notice,2
+00204-2018,"Amount: 1500.00, Delivery: mail, Sent: 22/11/2018",Nov-18,Penalty Notice,1
+00212-2017,s329(2) - direction to remove unlawful water management work,Mar-18,Statutory Notice,1
+00215-2017,s329(2) - direction to remove unlawful water management work,Nov-17,Statutory Notice,1
+00215-2017,s329(2) - direction to remove unlawful water management work,Apr-18,Statutory Notice,1
+00216-2019,"Amount: 750.00, Delivery: mail, Sent: 05/12/2019",Dec-19,Penalty Notice,1
+00218-2018,s327(2) - swo re unlawful construction or use of water management work,Feb-19,Statutory Notice,1
+00218-2018,s329(2) - direction to remove unlawful water management work,Feb-19,Statutory Notice,1
+00219-2014,s333(2) - direction to protect water sources,Dec-16,Statutory Notice,1
+00219-2016,s333(2) - direction to protect water sources,Mar-19,Statutory Notice,1
+00222-2018,"Amount: 750.00, Delivery: mail, Sent: 22/10/2018",Oct-18,Penalty Notice,1
+00228-2018,"Amount: 750.00, Delivery: mail, Sent: 05/10/2018",Oct-18,Penalty Notice,1
+00229-2018,s326(1) - direction to install/maintain metering equipment,Dec-18,Statutory Notice,1
+00229-2018,s326(1) - direction to install/maintain metering equipment,Nov-18,Statutory Notice,3
+00230-2020,"Amount: 750.00, Delivery: mail, Sent: 16/06/2020",Jun-20,Penalty Notice,1
+00231-2019,"Amount: 750.00, Delivery: mail, Sent: 02/09/2019",Sep-19,Penalty Notice,2
+00231-2019,s329(2) - direction to remove unlawful water management work,Sep-19,Statutory Notice,2
+00232-2018,s326(1) - direction to install/maintain metering equipment,Nov-18,Statutory Notice,2
+00233-2018,s326(1) - direction to install/maintain metering equipment,Nov-18,Statutory Notice,1
+00235-2017,s329(2) - direction to remove unlawful water management work,Apr-19,Statutory Notice,1
+00238-2019,s329(2) - direction to remove unlawful water management work,Jan-20,Statutory Notice,1
+00238-2019,"Amount: 750.00, Delivery: mail, Sent: 04/12/2019",Dec-19,Penalty Notice,2
+00246-2017,s333(2) - direction to protect water sources,Nov-17,Statutory Notice,1
+00251-2018,s329(2) - direction to remove unlawful water management work,May-20,Statutory Notice,1
+00254-2017,"Amount: 750.00, Delivery: mail, Sent: 19/07/2018",Jul-18,Penalty Notice,1
+00256-2017,s333(2) - direction to protect water sources,Dec-17,Statutory Notice,1
+00256-2017,s333(2) - direction to protect water sources,Jan-18,Statutory Notice,1
+00256-2017,s333(2) - direction to protect water sources,Nov-17,Statutory Notice,2
+00256-2020,"Amount: 750.00, Delivery: mail, Sent: 27/08/2020",Aug-20,Penalty Notice,1
+00257-2020,"Amount: 750.00, Delivery: mail, Sent: 15/05/2020",May-20,Penalty Notice,1
+00258-2019,s327(2) - swo re unlawful construction or use of water management work,Jun-20,Statutory Notice,1
+00258-2019,s329(2) - direction to remove unlawful water management work,Jun-20,Statutory Notice,1
+00258-2019,"Amount: 750.00, Delivery: mail, Sent: 17/04/2020",Apr-20,Penalty Notice,2
+00267-2020,"Amount: 750.00, Delivery: mail, Sent: 29/09/2020",Sep-20,Penalty Notice,2
+00271-2017,"Amount: 750.00, Delivery: mail, Sent: 14/08/2017",Aug-17,Penalty Notice,1
+00274-2017,s329(2) - direction to remove unlawful water management work,Mar-19,Statutory Notice,2
+00275-2018,s329(2) - direction to remove unlawful water management work,Sep-20,Statutory Notice,2
+00275-2018,s329(2) - direction to remove unlawful water management work,Feb-20,Statutory Notice,3
+00278-2016,"Amount: 750.00, Delivery: mail, Sent: 19/12/2016",Dec-16,Penalty Notice,1
+00289-2016,"Amount: 1500.00, Delivery: mail, Sent: 05/02/2019",Feb-19,Penalty Notice,1
+00292-2019,"Amount: 750.00, Delivery: mail, Sent: 18/09/2019",Sep-19,Penalty Notice,1
+00293-2019,s333(2) - direction to protect water sources,Sep-19,Statutory Notice,1
+00301-2018,"Amount: 750.00, Delivery: mail, Sent: 22/10/2019",Oct-19,Penalty Notice,2
+00305-2019,s333(2) - direction to protect water sources,Jun-19,Statutory Notice,1
+00306-2017,"Amount: 750.00, Delivery: mail, Sent: 15/10/2018",Oct-18,Penalty Notice,2
+00306-2017,s333(2) - direction to protect water sources,Jun-18,Statutory Notice,2
+00311-2017,s328(2) - swo re unlawful controlled activity or aquifer interference,Nov-17,Statutory Notice,1
+00311-2017,s333(2) - direction to protect water sources,Dec-17,Statutory Notice,1
+00314-2017,"Amount: 750.00, Delivery: mail, Sent: 01/02/2019",Feb-19,Penalty Notice,1
+00318-2019,s327(2) - swo re unlawful construction or use of water management work,Jun-19,Statutory Notice,1
+00318-2019,"Amount: 750.00, Delivery: mail, Sent: 28/06/2019",Jun-19,Penalty Notice,2
+00321-2017,s328(2) - swo re unlawful controlled activity or aquifer interference,Nov-17,Statutory Notice,1
+00321-2019,"Amount: 750.00, Delivery: mail, Sent: 19/12/2019",Dec-19,Penalty Notice,1
+00325-2017,"Amount: 1500.00, Delivery: mail, Sent: 31/05/2019",May-19,Penalty Notice,1
+00327-2017,s333(2) - direction to protect water sources,May-19,Statutory Notice,1
+00337-2017,s329(2) - direction to remove unlawful water management work,Mar-18,Statutory Notice,1
+00337-2017,s329(2) - direction to remove unlawful water management work,Jul-18,Statutory Notice,1
+00350-2019,"Amount: 1500.00, Delivery: mail, Sent: 17/01/2020",Jan-20,Penalty Notice,1
+00350-2019,s329(2) - direction to remove unlawful water management work,Jan-20,Statutory Notice,1
+00357-2017,"Amount: 750.00, Delivery: mail, Sent: 12/11/2018",Nov-18,Penalty Notice,1
+00357-2017,s333(2) - direction to protect water sources,Jun-18,Statutory Notice,1
+00357-2018,s333(2) - direction to protect water sources,Mar-19,Statutory Notice,1
+00357-2018,"Amount: 750.00, Delivery: mail, Sent: 19/02/2019",Feb-19,Penalty Notice,2
+00359-2015,s333(2) - direction to protect water sources,Aug-16,Statutory Notice,1
+00359-2015,s333(2) - direction to protect water sources,Jan-17,Statutory Notice,1
+00359-2015,s333(2) - direction to protect water sources,Sep-17,Statutory Notice,1
+00359-2015,s333(2) - direction to protect water sources,Nov-17,Statutory Notice,1
+00359-2018,s327(2) - swo re unlawful construction or use of water management work,Mar-20,Statutory Notice,1
+00359-2018,s329(2) - direction to remove unlawful water management work,Mar-20,Statutory Notice,1
+00365-2020,"Amount: 750.00, Delivery: mail, Sent: 23/04/2020",Apr-20,Penalty Notice,2
+00372-2015,60G - Notice re water taken illegally,Aug-19,Statutory Notice,1
+00372-2019,s329(2) - direction to remove unlawful water management work,Jul-19,Statutory Notice,1
+00372-2019,"Amount: 750.00, Delivery: mail, Sent: 05/08/2019",Aug-19,Penalty Notice,2
+00383-2016,s333(2) - direction to protect water sources,Apr-18,Statutory Notice,1
+00383-2016,s333(2) - direction to protect water sources,Nov-18,Statutory Notice,1
+00389-2017,"Amount: 750.00, Delivery: mail, Sent: 06/02/2019",Feb-19,Penalty Notice,2
+00389-2017,"Amount: 1500.00, Delivery: mail, Sent: 06/02/2019",Feb-19,Penalty Notice,2
+00389-2017,s328(2) - swo re unlawful controlled activity or aquifer interference,Sep-18,Statutory Notice,2
+00390-2018,"Amount: 750.00, Delivery: mail, Sent: 23/12/2019",Dec-19,Penalty Notice,1
+00394-2017,s326(1) - direction to install/maintain metering equipment,Nov-18,Statutory Notice,1
+00394-2017,"Amount: 1500.00, Delivery: mail, Sent: 08/03/2018",Mar-18,Penalty Notice,2
+00398-2018,"Amount: 750.00, Delivery: mail, Sent: 14/09/2018",Sep-18,Penalty Notice,1
+00398-2018,s329(2) - direction to remove unlawful water management work,Sep-19,Statutory Notice,1
+00404-2018,"Amount: 750.00, Delivery: mail, Sent: 06/02/2019",Feb-19,Penalty Notice,1
+00404-2018,s327(2) - swo re unlawful construction or use of water management work,Jul-18,Statutory Notice,1
+00406-2017,s329(2) - direction to remove unlawful water management work,Dec-18,Statutory Notice,1
+00406-2017,s329(2) - direction to remove unlawful water management work,Feb-19,Statutory Notice,1
+00407-2020,"Amount: 750.00, Delivery: mail, Sent: 29/04/2020",Apr-20,Penalty Notice,1
+00411-2016,s333(2) - direction to protect water sources,Mar-19,Statutory Notice,2
+00413-2019,"Amount: 1500.00, Delivery: mail, Sent: 25/03/2020",Mar-20,Penalty Notice,2
+00417-2017,s328(2) - swo re unlawful controlled activity or aquifer interference,Feb-18,Statutory Notice,1
+00422-2019,s329(2) - direction to remove unlawful water management work,Aug-20,Statutory Notice,1
+00425-2017,"Amount: 750.00, Delivery: mail, Sent: 22/12/2017",Dec-17,Penalty Notice,1
+00425-2017,s328(2) - swo re unlawful controlled activity or aquifer interference,Dec-17,Statutory Notice,1
+00425-2017,s333(2) - direction to protect water sources,Dec-17,Statutory Notice,1
+00425-2017,s333(2) - direction to protect water sources,Mar-18,Statutory Notice,1
+00425-2017,s328(2) - swo re unlawful controlled activity or aquifer interference,Mar-18,Statutory Notice,2
+00427-2020,s329(2) - direction to remove unlawful water management work,Nov-20,Statutory Notice,1
+00434-2020,"Amount: 750.00, Delivery: mail, Sent: 21/02/2020",Feb-20,Penalty Notice,1
+00434-2020,s329(2) - direction to remove unlawful water management work,Mar-20,Statutory Notice,1
+00436-2019,"Amount: 750.00, Delivery: mail, Sent: 14/01/2020",Jan-20,Penalty Notice,1
+00436-2020,"Amount: 1500.00, Delivery: mail, Sent: 21/02/2020",Feb-20,Penalty Notice,2
+00436-2020,s327(2) - swo re unlawful construction or use of water management work,Feb-20,Statutory Notice,2
+00437-2019,"Amount: 750.00, Delivery: mail, Sent: 27/11/2019",Nov-19,Penalty Notice,1
+00440-2019,"Amount: 750.00, Delivery: mail, Sent: 27/02/2020",Feb-20,Penalty Notice,1
+00441-2016,"Amount: 750.00, Delivery: mail, Sent: 15/02/2019",Feb-19,Penalty Notice,1
+00441-2018,"Amount: 750.00, Delivery: mail, Sent: 06/12/2019",Dec-19,Penalty Notice,1
+00441-2019,"Amount: 1500.00, Delivery: mail, Sent: 27/08/2019",Aug-19,Penalty Notice,2
+00447-2019,"Amount: 1500.00, Delivery: mail, Sent: 16/12/2019",Dec-19,Penalty Notice,2
+00449-2020,"Amount: 750.00, Delivery: mail, Sent: 20/02/2020",Feb-20,Penalty Notice,1
+00454-2019,s327(2) - swo re unlawful construction or use of water management work,Jun-19,Statutory Notice,2
+00454-2019,"Amount: 1500.00, Delivery: mail, Sent: 04/11/2019",Nov-19,Penalty Notice,3
+00455-2018,s333(2) - direction to protect water sources,Mar-19,Statutory Notice,2
+00456-2018,"Amount: 750.00, Delivery: mail, Sent: 14/09/2018",Sep-18,Penalty Notice,1
+00456-2018,s329(2) - direction to remove unlawful water management work,Jul-18,Statutory Notice,1
+00457-2018,s327(2) - swo re unlawful construction or use of water management work,Dec-18,Statutory Notice,1
+00458-2020,s333(2) - direction to protect water sources,Jun-20,Statutory Notice,1
+00459-2017,"Amount: 750.00, Delivery: mail, Sent: 05/02/2019",Feb-19,Penalty Notice,1
+00460-2017,"Amount: 750.00, Delivery: mail, Sent: 28/03/2018",Mar-18,Penalty Notice,1
+00460-2017,s333(2) - direction to protect water sources,Feb-18,Statutory Notice,1
+00460-2018,"Amount: 750.00, Delivery: mail, Sent: 19/07/2018",Jul-18,Penalty Notice,1
+00463-2018,"Amount: 750.00, Delivery: mail, Sent: 18/07/2018",Jul-18,Penalty Notice,1
+00465-2020,"Amount: 750.00, Delivery: mail, Sent: 21/02/2020",Feb-20,Penalty Notice,1
+00466-2020,"Amount: 750.00, Delivery: mail, Sent: 21/02/2020",Feb-20,Penalty Notice,1
+00467-2020,"Amount: 750.00, Delivery: mail, Sent: 23/04/2020",Apr-20,Penalty Notice,2
+00467-2020,s329(2) - direction to remove unlawful water management work,Apr-20,Statutory Notice,2
+00470-2019,"Amount: 750.00, Delivery: mail, Sent: 23/04/2020",Apr-20,Penalty Notice,1
+00470-2019,s327(2) - swo re unlawful construction or use of water management work,Jan-20,Statutory Notice,1
+00479-2016,s333(2) - direction to protect water sources,Jul-19,Statutory Notice,1
+00479-2016,s333(2) - direction to protect water sources,Jan-19,Statutory Notice,2
+00480-2019,"Amount: 750.00, Delivery: mail, Sent: 17/03/2020",Mar-20,Penalty Notice,1
+00480-2019,s328(2) - swo re unlawful controlled activity or aquifer interference,Jul-20,Statutory Notice,1
+00480-2019,s328(2) - swo re unlawful controlled activity or aquifer interference,Aug-20,Statutory Notice,1
+00480-2019,s329(2) - direction to remove unlawful water management work,Apr-19,Statutory Notice,1
+00481-2020,"Amount: 750.00, Delivery: mail, Sent: 05/03/2020",Mar-20,Penalty Notice,1
+00482-2018,s326(1) - direction to install/maintain metering equipment,Aug-18,Statutory Notice,1
+00482-2018,s327(2) - swo re unlawful construction or use of water management work,Jan-19,Statutory Notice,1
+00482-2018,s327(2) - swo re unlawful construction or use of water management work,Feb-19,Statutory Notice,1
+00482-2018,s329(2) - direction to remove unlawful water management work,Sep-18,Statutory Notice,1
+00482-2018,s331 - direction to basic landholder rights,Jan-19,Statutory Notice,1
+00482-2018,s328(2) - swo re unlawful controlled activity or aquifer interference,Nov-18,Statutory Notice,2
+00482-2018,s327(2) - swo re unlawful construction or use of water management work,Aug-18,Statutory Notice,3
+00485-2017,s328(2) - swo re unlawful controlled activity or aquifer interference,Aug-19,Statutory Notice,1
+00485-2020,"Amount: 750.00, Delivery: mail, Sent: 30/07/2020",Jul-20,Penalty Notice,1
+00487-2016,s333(2) - direction to protect water sources,Mar-19,Statutory Notice,1
+00487-2017,s333(2) - direction to protect water sources,Feb-20,Statutory Notice,1
+00487-2017,s333(2) - direction to protect water sources,May-20,Statutory Notice,1
+00492-2016,"Amount: 750.00, Delivery: mail, Sent: 28/03/2018",Mar-18,Penalty Notice,1
+00495-2017,s329(2) - direction to remove unlawful water management work,Feb-18,Statutory Notice,2
+00506-2016,s333(2) - direction to protect water sources,Mar-19,Statutory Notice,1
+00510-2019,"Amount: 750.00, Sent: 29/08/2019",Aug-19,Penalty Notice,1
+00514-2017,"Amount: 750.00, Delivery: mail, Sent: 24/04/2018",Apr-18,Penalty Notice,1
+00514-2017,s329(2) - direction to remove unlawful water management work,May-18,Statutory Notice,1
+00518-2015,"Amount: 1500.00, Delivery: mail, Sent: 28/09/2015",Sep-15,Penalty Notice,2
+00519-2016,"Amount: 1500.00, Delivery: mail, Sent: 08/01/2018",Jan-18,Penalty Notice,1
+00520-2019,"Amount: 1500.00, Delivery: mail, Sent: 21/05/2020",May-20,Penalty Notice,4
+00521-2018,s326(1) - direction to install/maintain metering equipment,Dec-18,Statutory Notice,1
+00521-2018,s327(2) - swo re unlawful construction or use of water management work,Jan-19,Statutory Notice,1
+00521-2018,s327(2) - swo re unlawful construction or use of water management work,Dec-20,Statutory Notice,1
+00524-2019,s329(2) - direction to remove unlawful water management work,Aug-20,Statutory Notice,1
+00526-2014,"Amount: 750.00, Delivery: mail, Sent: 29/04/2016",Apr-16,Penalty Notice,1
+00526-2014,s333(2) - direction to protect water sources,Apr-16,Statutory Notice,1
+00526-2014,s333(2) - direction to protect water sources,Jun-16,Statutory Notice,1
+00528-2019,"Amount: 750.00, Delivery: mail, Sent: 30/07/2020",Jul-20,Penalty Notice,2
+00530-2019,"Amount: 750.00, Delivery: mail, Sent: 04/02/2020",Feb-20,Penalty Notice,1
+00531-2016,"Amount: 1500.00, Delivery: mail, Sent: 18/10/2017",Oct-17,Penalty Notice,1
+00531-2018,s329(2) - direction to remove unlawful water management work,Nov-18,Statutory Notice,1
+00531-2018,s329(2) - direction to remove unlawful water management work,Dec-18,Statutory Notice,1
+00531-2018,s329(2) - direction to remove unlawful water management work,Jan-19,Statutory Notice,1
+00531-2018,s329(2) - direction to remove unlawful water management work,Apr-20,Statutory Notice,2
+00534-2019,s328(2) - swo re unlawful controlled activity or aquifer interference,Nov-19,Statutory Notice,1
+00536-2020,"Amount: 750.00, Delivery: mail, Sent: 21/02/2020",Feb-20,Penalty Notice,1
+00539-2019,"Amount: 750.00, Delivery: mail, Sent: 09/09/2019",Sep-19,Penalty Notice,1
+00540-2019,s333(2) - direction to protect water sources,Oct-19,Statutory Notice,1
+00540-2019,s333(2) - direction to protect water sources,Nov-19,Statutory Notice,1
+00540-2020,"Amount: 750.00, Delivery: mail, Sent: 21/02/2020",Feb-20,Penalty Notice,1
+00543-2019,"Amount: 750.00, Delivery: mail, Sent: 09/12/2019",Dec-19,Penalty Notice,1
+00544-2018,s326(1) - direction to install/maintain metering equipment,Feb-19,Statutory Notice,1
+00544-2018,s326(1) - direction to install/maintain metering equipment,Mar-19,Statutory Notice,1
+00544-2018,s326(1) - direction to install/maintain metering equipment,Apr-19,Statutory Notice,1
+00547-2016,"Amount: 1500.00, Delivery: mail, Sent: 19/07/2018",Jul-18,Penalty Notice,1
+00547-2016,s333(2) - direction to protect water sources,Aug-18,Statutory Notice,1
+00548-2016,"Amount: 750.00, Delivery: mail, Sent: 24/01/2019",Jan-19,Penalty Notice,2
+00550-2018,s333(2) - direction to protect water sources,Dec-18,Statutory Notice,1
+00559-2019,"Amount: 750.00, Delivery: mail, Sent: 20/02/2020",Feb-20,Penalty Notice,1
+00559-2019,s329(2) - direction to remove unlawful water management work,Feb-20,Statutory Notice,1
+00562-2018,Enforcement Order,Oct-18,Statutory Notice,1
+00562-2018,s329(2) - direction to remove unlawful water management work,Oct-18,Statutory Notice,2
+00568-2020,"Amount: 750.00, Delivery: mail, Sent: 06/03/2020",Mar-20,Penalty Notice,1
+00569-2016,"Amount: 750.00, Delivery: mail, Sent: 26/09/2018",Sep-18,Penalty Notice,1
+00569-2016,s333(2) - direction to protect water sources,Oct-17,Statutory Notice,1
+00570-2018,s333(2) - direction to protect water sources,Jul-19,Statutory Notice,2
+00570-2019,"Amount: 1500.00, Delivery: mail, Sent: 30/09/2020",Sep-20,Penalty Notice,1
+00570-2019,s329(2) - direction to remove unlawful water management work,Sep-20,Statutory Notice,1
+00572-2019,"Amount: 1500.00, Delivery: mail, Sent: 17/07/2020",Jul-20,Penalty Notice,1
+00575-2020,s329(2) - direction to remove unlawful water management work,Apr-20,Statutory Notice,1
+00577-2020,"Amount: 750.00, Delivery: mail, Sent: 26/08/2020",Aug-20,Penalty Notice,1
+00588-2020,s329(2) - direction to remove unlawful water management work,May-20,Statutory Notice,1
+00594-2018,"Amount: 750.00, Delivery: mail, Sent: 09/01/2020",Jan-20,Penalty Notice,2
+00594-2018,"Amount: 1500.00, Delivery: mail, Sent: 09/01/2020",Jan-20,Penalty Notice,2
+00598-2019,"Amount: 750.00, Delivery: mail, Sent: 28/07/2020",Jul-20,Penalty Notice,2
+00598-2019,"Amount: 750.00, Delivery: mail, Sent: 29/07/2020",Jul-20,Penalty Notice,2
+00601-2014,"Amount: 1500.00, Delivery: mail, Sent: 04/05/2016",May-16,Penalty Notice,1
+00601-2014,s333(2) - direction to protect water sources,May-16,Statutory Notice,1
+00605-2014,s333(2) - direction to protect water sources,Jul-18,Statutory Notice,1
+00612-2018,"Amount: 750.00, Delivery: mail, Sent: 13/08/2019",Aug-19,Penalty Notice,1
+00616-2018,s333(2) - direction to protect water sources,Jul-19,Statutory Notice,2
+00621-2018,s333(2) - direction to protect water sources,Nov-18,Statutory Notice,1
+00621-2019,s329(2) - direction to remove unlawful water management work,Sep-19,Statutory Notice,1
+00626-2019,s333(2) - direction to protect water sources,Apr-20,Statutory Notice,1
+00626-2019,"Amount: 750.00, Delivery: mail, Sent: 16/04/2020",Apr-20,Penalty Notice,2
+00637-2019,s329(2) - direction to remove unlawful water management work,Sep-19,Statutory Notice,2
+00638-2020,"Amount: 750.00, Delivery: mail, Sent: 01/10/2020",Oct-20,Penalty Notice,1
+00640-2019,"Amount: 750.00, Delivery: mail, Sent: 20/09/2019",Sep-19,Penalty Notice,2
+00650-2020,s327(2) - swo re unlawful construction or use of water management work,May-20,Statutory Notice,1
+00654-2019,"Amount: 750.00, Delivery: mail, Sent: 04/05/2020",May-20,Penalty Notice,1
+00654-2019,s333(2) - direction to protect water sources,Apr-20,Statutory Notice,1
+00661-2019,s329(2) - direction to remove unlawful water management work,Sep-19,Statutory Notice,1
+00664-2019,"Amount: 750.00, Delivery: mail, Sent: 06/12/2019",Dec-19,Penalty Notice,1
+00667-2019,"Amount: 750.00, Delivery: mail, Sent: 04/12/2019",Dec-19,Penalty Notice,1
+00684-2018,s333(2) - direction to protect water sources,Nov-19,Statutory Notice,1
+00708-2018,"Amount: 750.00, Delivery: mail, Sent: 15/04/2019",Apr-19,Penalty Notice,1
+00708-2018,s326(1) - direction to install/maintain metering equipment,Apr-19,Statutory Notice,2
+00716-2020,"Amount: 750.00, Delivery: mail, Sent: 15/06/2020",Jun-20,Penalty Notice,1
+00718-2019,"Amount: 750.00, Delivery: mail, Sent: 19/11/2019",Nov-19,Penalty Notice,3
+00729-2015,s329(2) - direction to remove unlawful water management work,Aug-16,Statutory Notice,1
+00729-2015,s333(2) - direction to protect water sources,Aug-16,Statutory Notice,1
+00729-2015,s333(2) - direction to protect water sources,Jul-19,Statutory Notice,1
+00729-2020,s326(1) - direction to install/maintain metering equipment,Jul-20,Statutory Notice,2
+00735-2020,"Amount: 750.00, Delivery: mail, Sent: 10/07/2020",Jul-20,Penalty Notice,1
+00743-2018,"Amount: 750.00, Delivery: mail, Sent: 09/04/2020",Apr-20,Penalty Notice,2
+00751-2019,s329(2) - direction to remove unlawful water management work,Sep-20,Statutory Notice,1
+00753-2018,"Amount: 750.00, Delivery: mail, Sent: 06/12/2019",Dec-19,Penalty Notice,1
+00758-2018,s333(2) - direction to protect water sources,Jul-19,Statutory Notice,1
+00763-2015,s333(2) - direction to protect water sources,Dec-18,Statutory Notice,1
+00764-2019,"Amount: 750.00, Delivery: mail, Sent: 17/12/2019",Dec-19,Penalty Notice,1
+00783-2015,"Amount: 750.00, Delivery: mail, Sent: 05/04/2016",Apr-16,Penalty Notice,1
+00787-2018,s330(1) - swo (temp) to protect public interest,Mar-19,Statutory Notice,1
+00814-2018,s333(2) - direction to protect water sources,Dec-19,Statutory Notice,1
+00823-2015,"Amount: 1500.00, Delivery: mail, Sent: 28/11/2017",Nov-17,Penalty Notice,1
+00824-2018,"Amount: 750.00, Delivery: mail, Sent: 26/11/2019",Nov-19,Penalty Notice,2
+00825-2018,"Amount: 1500.00, Delivery: mail, Sent: 22/11/2019",Nov-19,Penalty Notice,1
+00827-2020,s327(2) - swo re unlawful construction or use of water management work,Aug-20,Statutory Notice,2
+00831-2018,s327(2) - swo re unlawful construction or use of water management work,Nov-19,Statutory Notice,1
+00838-2018,"Amount: 750.00, Delivery: mail, Sent: 23/12/2019",Dec-19,Penalty Notice,1
+00838-2018,s333(2) - direction to protect water sources,Dec-19,Statutory Notice,1
+00839-2019,"Amount: 750.00, Delivery: mail, Sent: 04/05/2020",May-20,Penalty Notice,1
+00839-2019,s333(2) - direction to protect water sources,Apr-20,Statutory Notice,1
+00848-2018,"Amount: 750.00, Delivery: mail, Sent: 24/07/2019",Jul-19,Penalty Notice,3
+00848-2018,s329(2) - direction to remove unlawful water management work,Oct-19,Statutory Notice,3
+00851-2018,s330(1) - swo (temp) to protect public interest,Dec-18,Statutory Notice,1
+00861-2018,s333(2) - direction to protect water sources,Feb-19,Statutory Notice,1
+00868-2019,s327(2) - swo re unlawful construction or use of water management work,Dec-19,Statutory Notice,1
+00871-2019,s327(2) - swo re unlawful construction or use of water management work,Mar-20,Statutory Notice,1
+00881-2018,"Amount: 1500.00, Delivery: mail, Sent: 20/04/2020",Apr-20,Penalty Notice,2
+00888-2020,"Amount: 1500.00, Delivery: mail, Sent: 18/08/2020",Aug-20,Penalty Notice,2
+00914-2020,s329(2) - direction to remove unlawful water management work,May-20,Statutory Notice,1
+00928-2019,s326(1) - direction to install/maintain metering equipment,Aug-20,Statutory Notice,1
+00928-2019,"Amount: 750.00, Delivery: mail, Sent: 30/07/2020",Jul-20,Penalty Notice,2
+00938-2019,"Amount: 1500.00, Delivery: mail, Sent: 31/01/2020",Jan-20,Penalty Notice,1
+00938-2019,s327(2) - swo re unlawful construction or use of water management work,Feb-20,Statutory Notice,1
+00957-2019,s329(2) - direction to remove unlawful water management work,Jul-20,Statutory Notice,1
+00971-2019,s333(2) - direction to protect water sources,Feb-20,Statutory Notice,1
+00971-2019,s333(2) - direction to protect water sources,Apr-20,Statutory Notice,1
+00971-2019,s333(2) - direction to protect water sources,May-20,Statutory Notice,2
+00975-2019,"Amount: 750.00, Delivery: mail, Sent: 10/03/2020",Mar-20,Penalty Notice,1
+01081-2013,s329(2) - direction to remove unlawful water management work,Mar-16,Statutory Notice,1
+01089-2020,"Amount: 750.00, Delivery: mail, Sent: 22/06/2020",Jun-20,Penalty Notice,1
+01089-2020,s333(2) - direction to protect water sources,Jun-20,Statutory Notice,3
+01092-2019,"Amount: 750.00, Delivery: mail, Sent: 19/12/2019",Dec-19,Penalty Notice,1
+01108-2020,"Amount: 750.00, Delivery: mail, Sent: 29/07/2020",Jul-20,Penalty Notice,1
+01109-2019,s327(2) - swo re unlawful construction or use of water management work,Sep-19,Statutory Notice,1
+01120-2020,"Amount: 750.00, Delivery: mail, Sent: 21/10/2020",Oct-20,Penalty Notice,2
+01120-2020,"Amount: 1500.00, Delivery: mail, Sent: 21/10/2020",Oct-20,Penalty Notice,2
+01123-2019,"Amount: 750.00, Delivery: mail, Sent: 22/11/2019",Nov-19,Penalty Notice,1
+01123-2019,s329(2) - direction to remove unlawful water management work,Nov-19,Statutory Notice,1
+01147-2020,"Amount: 750.00, Delivery: mail, Sent: 13/11/2020",Nov-20,Penalty Notice,1
+01158-2019,"Amount: 750.00, Delivery: mail, Sent: 23/06/2020",Jun-20,Penalty Notice,1
+01170-2019,s327(2) - swo re unlawful construction or use of water management work,Sep-19,Statutory Notice,1
+01175-2019,"Amount: 750.00, Delivery: mail, Sent: 02/10/2020",Oct-20,Penalty Notice,1
+01177-2019,"Amount: 1500.00, Delivery: mail, Sent: 24/01/2020",Jan-20,Penalty Notice,3
+01189-2019,s333(2) - direction to protect water sources,May-20,Statutory Notice,2
+01201-2019,"Amount: 750.00, Delivery: mail, Sent: 27/10/2020",Oct-20,Penalty Notice,1
+01227-2020,"Amount: 750.00, Delivery: mail, Sent: 03/09/2020",Sep-20,Penalty Notice,1
+01238-2019,"Amount: 750.00, Delivery: mail, Sent: 15/06/2020",Jun-20,Penalty Notice,1
+01243-2019,60G - Notice re water taken illegally,Jul-20,Statutory Notice,1
+01253-2019,s329(2) - direction to remove unlawful water management work,Jan-20,Statutory Notice,1
+01259-2019,s333(2) - direction to protect water sources,Jul-20,Statutory Notice,1
+01270-2019,s327(2) - swo re unlawful construction or use of water management work,Feb-20,Statutory Notice,1
+01270-2019,"Amount: 750.00, Delivery: mail, Sent: 26/02/2020",Feb-20,Penalty Notice,2
+01302-2019,s329(2) - direction to remove unlawful water management work,Apr-20,Statutory Notice,2
+01305-2019,"Amount: 1500.00, Delivery: mail, Sent: 24/01/2020",Jan-20,Penalty Notice,1
+01311-2020,"Amount: 1500.00, Delivery: mail, Sent: 14/08/2020",Aug-20,Penalty Notice,1
+01361-2019,"Amount: 750.00, Delivery: mail, Sent: 22/01/2020",Jan-20,Penalty Notice,1
+01365-2019,"Amount: 750.00, Delivery: mail, Sent: 30/01/2020",Jan-20,Penalty Notice,1
+01458-2020,"Amount: 750.00, Delivery: mail, Sent: 28/08/2020",Aug-20,Penalty Notice,1
+01464-2020,"Amount: 750.00, Delivery: mail, Sent: 28/08/2020",Aug-20,Penalty Notice,1
+01469-2020,"Amount: 1500.00, Delivery: mail, Sent: 28/08/2020",Aug-20,Penalty Notice,1
+01746-2020,s326(1) - direction to install/maintain metering equipment,Sep-20,Statutory Notice,1
+01919-2020,"Amount: 750.00, Delivery: mail, Sent: 11/12/2020",Dec-20,Penalty Notice,1
+01947-2020,s329(2) - direction to remove unlawful water management work,Sep-20,Statutory Notice,1
+01952-2020,"Amount: 1500.00, Delivery: mail, Sent: 29/09/2020",Sep-20,Penalty Notice,1
+02236-2020,"Amount: 750.00, Delivery: mail, Sent: 20/11/2020",Nov-20,Penalty Notice,1
+</div>
+    </body>
+</html>
