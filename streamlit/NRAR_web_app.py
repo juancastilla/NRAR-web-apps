@@ -12,8 +12,20 @@ import streamlit as st
 # import streamlit.components.v1 as components
 # from pathlib import Path
 # import platform
-# import os
+import os
 
+import pandas as pd
+
+# from pivottablejs import pivot_ui
+# import plotly
+import plotly.express as px
+# import missingno as msno
+from datetime import datetime
+
+stdir = os.getcwd() # streamlit app dir
+
+# Configure for wide layout
+st.set_page_config(layout="wide")
 
 #%% App
 # Configure app layout and sidebar menu
@@ -26,7 +38,7 @@ st.sidebar.title('About')
 st.sidebar.info("This app is maintained by The Regulators")
 
 
-# if selection == 'Compliance Data Viz':
+if selection == 'Compliance Data Viz':
 
     # if platform.system() == 'Darwin':
     #     markdown = read_markdown_file('submit_page.md')
