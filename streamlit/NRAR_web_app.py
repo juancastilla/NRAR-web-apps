@@ -44,11 +44,20 @@ if selection == 'Compliance Data Viz':
     
     st.markdown('# Compliance Data — Sunburst Plot ')
     
+    if platform.system() == 'Darwin':
+        casedetails_path = 'data/compliance_dataviz/Case Details.csv'
+        enfactionscount_path = 'data/compliance_dataviz/Enforcement actions — count.csv'
+        enfactionsdetails_path = 'data/compliance_dataviz/Enforcement actions — description.csv'
+    else:
+        casedetails_path = os.path.join(stdir,'data/compliance_dataviz/Case Details.csv')
+        enfactionscount_path = os.path.join(stdir, 'data/compliance_dataviz/Enforcement actions — count.csv')
+        enfactionsdetails_path = os.path.join(stdir,'data/compliance_dataviz/Enforcement actions — description.csv')
+    
     custom_date_parser = lambda x: datetime.strptime(x, "%b-%y")
     nan_values_list = ["NaN",' ']
-    df_casedetails=pd.read_csv('data/compliance_dataviz/Case Details.csv', na_values=nan_values_list, parse_dates=['Received Date','Finalisation Date'], date_parser=custom_date_parser, index_col=0)
-    df_enfactions_count=pd.read_csv('data/compliance_dataviz/Enforcement actions — count.csv', na_values=nan_values_list, index_col=0)
-    df_enfactions_description=pd.read_csv('data/compliance_dataviz/Enforcement actions — description.csv', parse_dates=['Enforcement Action Date'], date_parser=custom_date_parser, na_values=nan_values_list, index_col=0)
+    df_casedetails=pd.read_csv(casedetails_path, na_values=nan_values_list, parse_dates=['Received Date','Finalisation Date'], date_parser=custom_date_parser, index_col=0)
+    df_enfactions_count=pd.read_csv(enfactionscount_path, na_values=nan_values_list, index_col=0)
+    df_enfactions_description=pd.read_csv(enfactionsdetails_path, parse_dates=['Enforcement Action Date'], date_parser=custom_date_parser, na_values=nan_values_list, index_col=0)
     df_casedetails['Received Date'] = df_casedetails['Received Date'].dt.strftime("%b-%y")
     df_casedetails['Finalisation Date'] = df_casedetails['Finalisation Date'].dt.strftime("%b-%y")
     df_enfactions_description['Enforcement Action Date'] = df_enfactions_description['Enforcement Action Date'].dt.strftime("%b-%y")
