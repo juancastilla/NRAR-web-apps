@@ -83,13 +83,13 @@ if selection == 'Compliance Data Viz':
         st.write('Press submit to update the plot')
         submitted = st.form_submit_button('Submit')
         
-        if submitted:
-            level_list = [level_1, level_2, level_3, level_4, level_5]
-            # items to be removed
-            unwanted = {'none'}
-            level_list = [ele for ele in level_list if ele not in unwanted]
-            #level_list
-            plot_sunburst()
+    if submitted:
+        level_list = [level_1, level_2, level_3, level_4, level_5]
+        # items to be removed
+        unwanted = {'none'}
+        level_list = [ele for ele in level_list if ele not in unwanted]
+        #level_list
+        plot_sunburst()
             
 
         
