@@ -49,9 +49,9 @@ if selection == 'Compliance Data Viz':
         enfactionscount_path = 'data/compliance_dataviz/Enforcement actions — count.csv'
         enfactionsdetails_path = 'data/compliance_dataviz/Enforcement actions — description.csv'
     else:
-        casedetails_path = os.path.join(stdir,'data/compliance_dataviz/Case Details.csv')
-        enfactionscount_path = os.path.join(stdir, 'data/compliance_dataviz/Enforcement actions — count.csv')
-        enfactionsdetails_path = os.path.join(stdir,'data/compliance_dataviz/Enforcement actions — description.csv')
+        casedetails_path = os.path.join(stdir,'streamlit/data/compliance_dataviz/Case Details.csv')
+        enfactionscount_path = os.path.join(stdir, 'streamlit/data/compliance_dataviz/Enforcement actions — count.csv')
+        enfactionsdetails_path = os.path.join(stdir,'streamlit/data/compliance_dataviz/Enforcement actions — description.csv')
     
     custom_date_parser = lambda x: datetime.strptime(x, "%b-%y")
     nan_values_list = ["NaN",' ']
