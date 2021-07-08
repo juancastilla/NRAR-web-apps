@@ -67,8 +67,7 @@ if selection == 'Compliance Data Viz':
         df_casedetails['Finalisation Date'] = df_casedetails['Finalisation Date'].dt.strftime("%b-%y")
         df_enfactions_description['Enforcement Action Date'] = df_enfactions_description['Enforcement Action Date'].dt.strftime("%b-%y")
         return df_casedetails
-        
-    df_casedetails = load_data()
+    
     
     with st.form(key='Sunburst comparison'):
         st.markdown('### **Select ordering of variables**')
@@ -94,6 +93,12 @@ if selection == 'Compliance Data Viz':
     
     if submitted:
         
+        data_load_state = st.text('Loading data...')
+        # Load 10,000 rows of data into the dataframe.
+        df_casedetails = load_data()
+        # Notify the reader that the data was successfully loaded.
+        data_load_state.text('Loading data...done!')     
+        
         level_list_L = [l1_L, l2_L, l3_L, l4_L, l5_L]
         level_list_R = [l1_R, l2_R, l3_R, l4_R, l5_R]
         # items to be removed
@@ -104,8 +109,8 @@ if selection == 'Compliance Data Viz':
         #level_list
         col1, col2 = st.beta_columns(2)
         
-        
         with col1:
+            data_load_state = st.text('loading plot 1...')
             path_title_L = ', '.join(level_list_L)
             df_L = df_casedetails.groupby(level_list_L).count().reset_index()
             df_L['count'] = df_L.iloc[:,-1:]
@@ -113,6 +118,7 @@ if selection == 'Compliance Data Viz':
             fig_L.update_layout(title=path_title_L)
             st.plotly_chart(fig_L)
         with col2:
+            data_load_state = st.text('loading plot 2...')
             path_title_R = ', '.join(level_list_R)
             df_R = df_casedetails.groupby(level_list_R).count().reset_index()
             df_R['count'] = df_R.iloc[:,-1:]
